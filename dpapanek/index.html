@@ -15,8 +15,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="bg">
-        <div class="center-container">
+    <div class="loader"></div>
+
+    <div class="bg content">
+        <div class="center-container main">
             <div class="center-row">
                 <div class="col-xs-6 bg-one text-center big-text" style="border-right: 1px solid #eee">Daniel<br />Papanek</div>
                 <div class="col-xs-6 bg-two text-center" style="background-color:rgba(0, 0, 0, 0.65); border-left: 1px solid #eee"><h2>Developer.<br />Lover.<br />Entrepreneur.</h2></div>
@@ -24,13 +26,14 @@
         </div>
     </div>
 
-    <div class="section-space" style="background-color:black">
+
+    <div class="section-space content" style="background-color:black">
         <div class="container" style="text-align: center; background-color:white;">
             <div class="row" data-bind="foreach: skill_categories">
                 <div class="col-xs-12 col-sm-6 col-lg-4 col-xl-2">
-                    <div class="heading-text" data-bind="text: category"></div>
+                    <div class="heading-text fadein" data-bind="text: category"></div>
                     <ul class="list-group list-text" data-bind="foreach: skills">
-                        <li class="list-group-item" data-bind="text: title"></li>
+                        <li class="list-group-item fadein" data-bind="text: title"></li>
                     </ul>
                 </div>
             </div>

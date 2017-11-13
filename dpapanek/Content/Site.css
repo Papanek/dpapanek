@@ -1,17 +1,40 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html{
+    height: 100%;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+body{
+    height: 100%;
+    overflow-y:scroll;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.bg {
+    background-image: url('images/bg-img2.jpg');
+
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.center-container {
+    height: 100%;
+    display: table;
+    width: 100%;
+    margin: 0;
+}
+
+.center-row {
+    height: 50%;
+    width: 100%;
+    display: table-row;
+}
+
+.center-row > div {
+    height: 100%;
+    width: 50%;
+    display: table-cell;
+    border: 0 solid #eee;
+    color: #fff;
+    vertical-align: middle;
 }

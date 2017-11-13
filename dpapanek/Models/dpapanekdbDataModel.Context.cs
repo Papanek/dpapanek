@@ -10,7 +10,10 @@
 namespace dpapanek.Models
 {
     using System;
+    using System.Configuration;
+    using System.Data.Common;
     using System.Data.Entity;
+    using System.Data.Entity.Core.EntityClient;
     using System.Data.Entity.Infrastructure;
     
     public partial class Entities : DbContext
@@ -18,6 +21,16 @@ namespace dpapanek.Models
         public Entities()
             : base("name=Entities")
         {
+            var originalConnectionString = ConfigurationManager.ConnectionStrings["Entities"].ConnectionString;
+            var entityBuilder = new EntityConnectionStringBuilder(originalConnectionString);
+            var factory = DbProviderFactories.GetFactory(entityBuilder.Provider);
+            var providerBuilder = factory.CreateConnectionStringBuilder();
+            var dbpass = Environment.GetEnvironmentVariable("dbpass", EnvironmentVariableTarget.User);
+
+            providerBuilder.ConnectionString = entityBuilder.ProviderConnectionString;
+            providerBuilder.Add("Password", dbpass);
+
+            Database.Connection.ConnectionString = providerBuilder.ToString();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

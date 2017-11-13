@@ -256,6 +256,7 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fonts\HeadlinerNo45.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

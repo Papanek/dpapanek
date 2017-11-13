@@ -1,10 +1,16 @@
-﻿html{
+﻿@font-face {
+    font-family: 'HeadlinerNo45';
+    src: url('fonts/HeadlinerNo45.ttf') format('truetype');
+}
+
+html{
     height: 100%;
 }
 
 body{
     height: 100%;
     overflow-y:scroll;
+    font-family: HeadlinerNo45;
 }
 
 .bg {

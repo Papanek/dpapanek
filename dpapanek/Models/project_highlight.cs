@@ -12,12 +12,12 @@ namespace dpapanek.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class job_highlights
+    public partial class project_highlight
     {
         public int highlight_id { get; set; }
-        public int job_id { get; set; }
+        public int project_id { get; set; }
         public string description { get; set; }
     
-        public virtual job job { get; set; }
+        public virtual project project { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="courses">
           <Key>
             <PropertyRef Name="course_id" />
@@ -61,7 +61,7 @@
           <Property Name="subtitle" Type="varchar" MaxLength="200" />
           <Property Name="description" Type="varchar(max)" />
         </EntityType>
-        <EntityType Name="skill_category">
+        <EntityType Name="skill_categories">
           <Key>
             <PropertyRef Name="skill_category_id" />
           </Key>
@@ -70,12 +70,24 @@
         </EntityType>
         <EntityType Name="skills">
           <Key>
-            <PropertyRef Name="skills_id" />
+            <PropertyRef Name="skill_id" />
           </Key>
-          <Property Name="skills_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="skill_category" Type="int" Nullable="false" />
-          <Property Name="skill" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="skill_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="skill_category_id" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
+        <Association Name="FK_skill_category">
+          <End Role="skill_categories" Type="Self.skill_categories" Multiplicity="1" />
+          <End Role="skills" Type="Self.skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skill_categories">
+              <PropertyRef Name="skill_category_id" />
+            </Principal>
+            <Dependent Role="skills">
+              <PropertyRef Name="skill_category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="job_id">
           <End Role="jobs" Type="Self.jobs" Multiplicity="1" />
           <End Role="job_highlights" Type="Self.job_highlights" Multiplicity="*" />
@@ -102,18 +114,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="skill_cat_fk">
-          <End Role="skill_category" Type="Self.skill_category" Multiplicity="1" />
-          <End Role="skills" Type="Self.skills" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="skill_category">
-              <PropertyRef Name="skill_category_id" />
-            </Principal>
-            <Dependent Role="skills">
-              <PropertyRef Name="skill_category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="courses" EntityType="Self.courses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="education" EntityType="Self.education" Schema="dbo" store:Type="Tables" />
@@ -121,8 +121,12 @@
           <EntitySet Name="jobs" EntityType="Self.jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project_highlights" EntityType="Self.project_highlights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="projects" EntityType="Self.projects" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="skill_category" EntityType="Self.skill_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="skill_categories" EntityType="Self.skill_categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="skills" EntityType="Self.skills" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_skill_category" Association="Self.FK_skill_category">
+            <End Role="skill_categories" EntitySet="skill_categories" />
+            <End Role="skills" EntitySet="skills" />
+          </AssociationSet>
           <AssociationSet Name="job_id" Association="Self.job_id">
             <End Role="jobs" EntitySet="jobs" />
             <End Role="job_highlights" EntitySet="job_highlights" />
@@ -131,22 +135,39 @@
             <End Role="projects" EntitySet="projects" />
             <End Role="project_highlights" EntitySet="project_highlights" />
           </AssociationSet>
-          <AssociationSet Name="skill_cat_fk" Association="Self.skill_cat_fk">
-            <End Role="skill_category" EntitySet="skill_category" />
-            <End Role="skills" EntitySet="skills" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="courses" EntityType="Model.course" />
+          <EntitySet Name="educations" EntityType="Model.education" />
+          <EntitySet Name="job_highlight" EntityType="Model.job_highlight" />
+          <EntitySet Name="jobs" EntityType="Model.job" />
+          <EntitySet Name="project_highlight" EntityType="Model.project_highlight" />
+          <EntitySet Name="projects" EntityType="Model.project" />
+          <EntitySet Name="skill_category" EntityType="Model.skill_category" />
+          <EntitySet Name="skills" EntityType="Model.skill" />
+          <AssociationSet Name="job_id" Association="Model.job_id">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="job_highlights" EntitySet="job_highlight" />
+          </AssociationSet>
+          <AssociationSet Name="project_id" Association="Model.project_id">
+            <End Role="project" EntitySet="projects" />
+            <End Role="project_highlights" EntitySet="project_highlight" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skill_category" Association="Model.FK_skill_category">
+            <End Role="skill_categories" EntitySet="skill_category" />
+            <End Role="skill" EntitySet="skills" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="course">
           <Key>
             <PropertyRef Name="course_id" />
           </Key>
           <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="grade" Type="Double" />
         </EntityType>
         <EntityType Name="education">
@@ -154,21 +175,21 @@
             <PropertyRef Name="education_id" />
           </Key>
           <Property Name="education_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="institution" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="credential" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="institution" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="credential" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="startdate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="enddate" Type="DateTime" Precision="0" />
           <Property Name="gpa" Type="Double" />
-          <Property Name="location" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="job_highlights">
+        <EntityType Name="job_highlight">
           <Key>
             <PropertyRef Name="highlight_id" />
           </Key>
           <Property Name="highlight_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="job_id" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="job" Relationship="Self.job_id" FromRole="job_highlights" ToRole="jobs" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="job" Relationship="Model.job_id" FromRole="job_highlights" ToRole="job" />
         </EntityType>
         <EntityType Name="job">
           <Key>
@@ -180,49 +201,49 @@
           <Property Name="startdate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="enddate" Type="DateTime" Precision="0" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="job_highlights" Relationship="Self.job_id" FromRole="jobs" ToRole="job_highlights" />
+          <NavigationProperty Name="job_highlights" Relationship="Model.job_id" FromRole="job" ToRole="job_highlights" />
         </EntityType>
-        <EntityType Name="project_highlights">
+        <EntityType Name="project_highlight">
           <Key>
             <PropertyRef Name="highlight_id" />
           </Key>
           <Property Name="highlight_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="project_id" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="project" Relationship="Self.project_id" FromRole="project_highlights" ToRole="projects" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="project" Relationship="Model.project_id" FromRole="project_highlights" ToRole="project" />
         </EntityType>
         <EntityType Name="project">
           <Key>
             <PropertyRef Name="project_id" />
           </Key>
           <Property Name="project_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="subtitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="project_highlights" Relationship="Self.project_id" FromRole="projects" ToRole="project_highlights" />
+          <NavigationProperty Name="project_highlights" Relationship="Model.project_id" FromRole="project" ToRole="project_highlights" />
         </EntityType>
         <EntityType Name="skill_category">
           <Key>
             <PropertyRef Name="skill_category_id" />
           </Key>
           <Property Name="skill_category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="category" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="skills" Relationship="Self.skill_cat_fk" FromRole="skill_category" ToRole="skills" />
+          <Property Name="category" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="skills" Relationship="Model.FK_skill_category" FromRole="skill_categories" ToRole="skill" />
         </EntityType>
         <EntityType Name="skill">
           <Key>
-            <PropertyRef Name="skills_id" />
+            <PropertyRef Name="skill_id" />
           </Key>
-          <Property Name="skills_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="skill_category" Type="Int32" Nullable="false" />
-          <Property Name="skill1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="skill_category1" Relationship="Self.skill_cat_fk" FromRole="skills" ToRole="skill_category" />
+          <Property Name="skill_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="skill_category_id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="skill_category" Relationship="Model.FK_skill_category" FromRole="skill" ToRole="skill_categories" />
         </EntityType>
         <Association Name="job_id">
-          <End Role="jobs" Type="Self.job" Multiplicity="1" />
-          <End Role="job_highlights" Type="Self.job_highlights" Multiplicity="*" />
+          <End Type="Model.job" Role="job" Multiplicity="1" />
+          <End Type="Model.job_highlight" Role="job_highlights" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="jobs">
+            <Principal Role="job">
               <PropertyRef Name="job_id" />
             </Principal>
             <Dependent Role="job_highlights">
@@ -231,12 +252,12 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="project_id">
-          <End Role="projects" Type="Self.project" Multiplicity="1">
+          <End Type="Model.project" Role="project" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="project_highlights" Type="Self.project_highlights" Multiplicity="*" />
+          <End Type="Model.project_highlight" Role="project_highlights" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="projects">
+            <Principal Role="project">
               <PropertyRef Name="project_id" />
             </Principal>
             <Dependent Role="project_highlights">
@@ -244,40 +265,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="skill_cat_fk">
-          <End Role="skill_category" Type="Self.skill_category" Multiplicity="1" />
-          <End Role="skills" Type="Self.skill" Multiplicity="*" />
+        <Association Name="FK_skill_category">
+          <End Type="Model.skill_category" Role="skill_categories" Multiplicity="1" />
+          <End Type="Model.skill" Role="skill" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="skill_category">
+            <Principal Role="skill_categories">
               <PropertyRef Name="skill_category_id" />
             </Principal>
-            <Dependent Role="skills">
-              <PropertyRef Name="skill_category" />
+            <Dependent Role="skill">
+              <PropertyRef Name="skill_category_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="courses" EntityType="Model.course" />
-          <EntitySet Name="educations" EntityType="Self.education" />
-          <EntitySet Name="job_highlights" EntityType="Self.job_highlights" />
-          <EntitySet Name="jobs" EntityType="Self.job" />
-          <EntitySet Name="project_highlights" EntityType="Self.project_highlights" />
-          <EntitySet Name="projects" EntityType="Self.project" />
-          <EntitySet Name="skill_category" EntityType="Self.skill_category" />
-          <EntitySet Name="skills" EntityType="Self.skill" />
-          <AssociationSet Name="job_id" Association="Self.job_id">
-            <End Role="jobs" EntitySet="jobs" />
-            <End Role="job_highlights" EntitySet="job_highlights" />
-          </AssociationSet>
-          <AssociationSet Name="project_id" Association="Self.project_id">
-            <End Role="projects" EntitySet="projects" />
-            <End Role="project_highlights" EntitySet="project_highlights" />
-          </AssociationSet>
-          <AssociationSet Name="skill_cat_fk" Association="Self.skill_cat_fk">
-            <End Role="skill_category" EntitySet="skill_category" />
-            <End Role="skills" EntitySet="skills" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -287,79 +286,79 @@
           <EntitySetMapping Name="courses">
             <EntityTypeMapping TypeName="Model.course">
               <MappingFragment StoreEntitySet="courses">
-                <ScalarProperty Name="course_id" ColumnName="course_id" />
-                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="course_id" ColumnName="course_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="educations">
             <EntityTypeMapping TypeName="Model.education">
               <MappingFragment StoreEntitySet="education">
-                <ScalarProperty Name="education_id" ColumnName="education_id" />
-                <ScalarProperty Name="institution" ColumnName="institution" />
-                <ScalarProperty Name="credential" ColumnName="credential" />
-                <ScalarProperty Name="startdate" ColumnName="startdate" />
-                <ScalarProperty Name="enddate" ColumnName="enddate" />
-                <ScalarProperty Name="gpa" ColumnName="gpa" />
                 <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="gpa" ColumnName="gpa" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="credential" ColumnName="credential" />
+                <ScalarProperty Name="institution" ColumnName="institution" />
+                <ScalarProperty Name="education_id" ColumnName="education_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="job_highlights">
-            <EntityTypeMapping TypeName="Model.job_highlights">
+          <EntitySetMapping Name="job_highlight">
+            <EntityTypeMapping TypeName="Model.job_highlight">
               <MappingFragment StoreEntitySet="job_highlights">
-                <ScalarProperty Name="highlight_id" ColumnName="highlight_id" />
-                <ScalarProperty Name="job_id" ColumnName="job_id" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="job_id" ColumnName="job_id" />
+                <ScalarProperty Name="highlight_id" ColumnName="highlight_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="jobs">
             <EntityTypeMapping TypeName="Model.job">
               <MappingFragment StoreEntitySet="jobs">
-                <ScalarProperty Name="job_id" ColumnName="job_id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="subtitle" ColumnName="subtitle" />
-                <ScalarProperty Name="startdate" ColumnName="startdate" />
-                <ScalarProperty Name="enddate" ColumnName="enddate" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="enddate" ColumnName="enddate" />
+                <ScalarProperty Name="startdate" ColumnName="startdate" />
+                <ScalarProperty Name="subtitle" ColumnName="subtitle" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="job_id" ColumnName="job_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="project_highlights">
-            <EntityTypeMapping TypeName="Model.project_highlights">
+          <EntitySetMapping Name="project_highlight">
+            <EntityTypeMapping TypeName="Model.project_highlight">
               <MappingFragment StoreEntitySet="project_highlights">
-                <ScalarProperty Name="highlight_id" ColumnName="highlight_id" />
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
+                <ScalarProperty Name="highlight_id" ColumnName="highlight_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="Model.project">
               <MappingFragment StoreEntitySet="projects">
-                <ScalarProperty Name="project_id" ColumnName="project_id" />
-                <ScalarProperty Name="title" ColumnName="title" />
-                <ScalarProperty Name="subtitle" ColumnName="subtitle" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="subtitle" ColumnName="subtitle" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="project_id" ColumnName="project_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="skill_category">
             <EntityTypeMapping TypeName="Model.skill_category">
-              <MappingFragment StoreEntitySet="skill_category">
-                <ScalarProperty Name="skill_category_id" ColumnName="skill_category_id" />
+              <MappingFragment StoreEntitySet="skill_categories">
                 <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="skill_category_id" ColumnName="skill_category_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="skills">
             <EntityTypeMapping TypeName="Model.skill">
               <MappingFragment StoreEntitySet="skills">
-                <ScalarProperty Name="skills_id" ColumnName="skills_id" />
-                <ScalarProperty Name="skill_category" ColumnName="skill_category" />
-                <ScalarProperty Name="skill1" ColumnName="skill" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="skill_category_id" ColumnName="skill_category_id" />
+                <ScalarProperty Name="skill_id" ColumnName="skill_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

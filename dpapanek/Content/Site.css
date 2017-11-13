@@ -10,14 +10,12 @@ html{
 body{
     height: 100%;
     overflow-y:scroll;
-    font-family: HeadlinerNo45;
 }
 
 .bg {
     background-image: url('images/bg-img2.jpg');
-
     height: 100%;
-
+    font-family: HeadlinerNo45;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -43,4 +41,21 @@ body{
     border: 0 solid #eee;
     color: #fff;
     vertical-align: middle;
+}
+
+.section-space{
+    padding-top: 1em;
+}
+
+.heading-text {
+    padding-top: 1em;
+    font-size: larger;
+}
+
+.list-text {
+    font-size: smaller;
+}
+
+.big-text {
+    font-size: 5em;
 }

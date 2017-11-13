@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d55070a5a5c54b7f90abbd187845dcec" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.course" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.education" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.job_highlights" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.job" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.project_highlights" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.project" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.skill_category" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.skill" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="Model.job_id" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.project_id" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.skill_cat_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.course" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.education" Width="1.5" PointX="7.875" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.job_highlight" Width="1.5" PointX="8" PointY="1.25" />
+        <EntityTypeShape EntityType="Model.job" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="Model.project_highlight" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="Model.project" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="Model.skill_category" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="Model.skill" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="Model.job_id" />
+        <AssociationConnector Association="Model.project_id" />
+        <AssociationConnector Association="Model.FK_skill_category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

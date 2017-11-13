@@ -1,12 +1,20 @@
 ﻿function dpapanekViewModel() {
     var self = this;
-    self.skill_category = ko.observableArray([]);
+    self.skill_categories = ko.observableArray([]);
 
-    $(document).ready(function () {
-        $.get('/api/skill_category', function (skillx) {
-            console.log(skillx);
-            self.skill_category(skillx);
+    $.get('/api/skill_category', function (categories) {
+        console.log(categories);
+
+        categories.forEach(function (category) {
+            self.skill_categories.push(category);
+
+            console.log(category);
+            category.skills.forEach(function (skill) {
+                console.log(skill.title);
+            });
         });
+
+        //self.skill_categories(categories);
     });
 }
 

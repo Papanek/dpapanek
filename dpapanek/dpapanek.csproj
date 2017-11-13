@@ -190,13 +190,13 @@
     <Compile Include="Models\job.cs">
       <DependentUpon>dpapanekdbDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\job_highlights.cs">
+    <Compile Include="Models\job_highlight.cs">
       <DependentUpon>dpapanekdbDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\project.cs">
       <DependentUpon>dpapanekdbDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\project_highlights.cs">
+    <Compile Include="Models\project_highlight.cs">
       <DependentUpon>dpapanekdbDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\skill.cs">

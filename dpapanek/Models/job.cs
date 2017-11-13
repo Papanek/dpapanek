@@ -17,7 +17,7 @@ namespace dpapanek.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public job()
         {
-            this.job_highlights = new HashSet<job_highlights>();
+            this.job_highlights = new HashSet<job_highlight>();
         }
     
         public int job_id { get; set; }
@@ -28,6 +28,6 @@ namespace dpapanek.Models
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<job_highlights> job_highlights { get; set; }
+        public virtual ICollection<job_highlight> job_highlights { get; set; }
     }
 }

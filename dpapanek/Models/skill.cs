@@ -14,10 +14,10 @@ namespace dpapanek.Models
     
     public partial class skill
     {
-        public int skills_id { get; set; }
-        public int skill_category { get; set; }
-        public string skill1 { get; set; }
+        public int skill_id { get; set; }
+        public int skill_category_id { get; set; }
+        public string title { get; set; }
     
-        public virtual skill_category skill_category1 { get; set; }
+        public virtual skill_category skill_category { get; set; }
     }
 }

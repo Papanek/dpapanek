@@ -12,7 +12,7 @@ namespace dpapanek.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class project_highlight
+    public partial class project_highlights
     {
         public int highlight_id { get; set; }
         public int project_id { get; set; }

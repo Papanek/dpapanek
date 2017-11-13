@@ -37,6 +37,22 @@
         </div>
     </div>
 
+    <section class="projects-section" id="projects" >
+        <div class="container" data-bind="foreach: projects" style="background-color: grey;">
+
+
+            <div class="row">
+                <div class="col-4">
+                    <span data-bind="text: title"></span>
+                </div>
+                <div class="col-8">
+                    <span data-bind="text: description"></span>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
 
     <script src="ViewModels/dpapanek-viewmodel.js"></script>
 </body>

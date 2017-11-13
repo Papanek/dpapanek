@@ -47,9 +47,9 @@ namespace dpapanek.Models
         public virtual DbSet<education> educations { get; set; }
         public virtual DbSet<job_highlight> job_highlight { get; set; }
         public virtual DbSet<job> jobs { get; set; }
-        public virtual DbSet<project_highlight> project_highlight { get; set; }
-        public virtual DbSet<project> projects { get; set; }
         public virtual DbSet<skill_category> skill_category { get; set; }
         public virtual DbSet<skill> skills { get; set; }
+        public virtual DbSet<project_highlight> project_highlight { get; set; }
+        public virtual DbSet<project> projects { get; set; }
     }
 }

@@ -1,21 +1,21 @@
 ﻿function dpapanekViewModel() {
     var self = this;
     self.skill_categories = ko.observableArray([]);
+    self.projects = ko.observableArray([]);
 
-    $.get('/api/skill_category', function (categories) {
-        console.log(categories);
-
-        categories.forEach(function (category) {
-            self.skill_categories.push(category);
-
-            console.log(category);
-            category.skills.forEach(function (skill) {
-                console.log(skill.title);
-            });
-        });
-
-        //self.skill_categories(categories);
+    $.get('/api/skill_category', function (skill_categories) {
+        console.log(skill_categories);
+        self.skill_categories(skill_categories);
     });
+
+    $.get('/api/projects', function (projects) {
+        console.log(projects);
+        self.projects(projects);
+    });
+
+    self.changeProject = function (project) {
+    
+    };
 }
 
 ko.applyBindings(new dpapanekViewModel());

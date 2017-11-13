@@ -27,6 +27,11 @@ namespace dpapanek.Models
             var providerBuilder = factory.CreateConnectionStringBuilder();
             var dbpass = System.Configuration.ConfigurationManager.AppSettings["dbpass"];
 
+            if (dbpass == null)
+            {
+                dbpass = Environment.GetEnvironmentVariable("dbpass", EnvironmentVariableTarget.User);
+            }
+
             providerBuilder.ConnectionString = entityBuilder.ProviderConnectionString;
             providerBuilder.Add("Password", dbpass);
 

@@ -19,6 +19,7 @@
     self.changeShown = function (project, direction) {
         project.shown(project.shown() + direction);
     };
+
 }
 
 ko.applyBindings(new dpapanekViewModel());

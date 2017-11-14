@@ -56,23 +56,39 @@
         <div class="container-fluid">
 
             <div class="row" data-bind="foreach: projects" >
-                <div data-bind="visible: shown()==1" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-height" style="background-color: pink;">
+
+                <div data-bind="visible: shown()==1" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-half">
                     <span class= "big-text" data-bind="text: short_title"></span>
-                    <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x" aria-hidden="true" style="position:absolute; bottom:0; right:0"></i>
+                    <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x arrow-r" aria-hidden="true"></i>
                 </div>
-                <div data-bind="visible: shown()==2" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: purple; display:none">
-                    <span data-bind="text: description"></span>
-                    <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x" aria-hidden="true" style="position:absolute; bottom:0; left:0"></i>
-                    <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x" aria-hidden="true" style="position:absolute; bottom:0; right:0"></i>
+                
+                <div data-bind="visible: shown()==2" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-half" style="display:none">
+                    <div class="w-100 proj-title">
+                        <div data-bind="text: title" class="proj-title-txt"></div>
+                    </div>
+                    <div class="w-100 proj-desc">
+                        <div data-bind="text: description" style="display:table-cell;"></div>
+                    </div>
+                        
+                    
+                    <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x arrow-l" aria-hidden="true"></i>
+                    <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x arrow-r" aria-hidden="true"></i>
                 </div>
-                <div data-bind="visible: shown()==3" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: red; display:none">
-                    <ul data-bind="foreach: project_highlights">
-                        <li data-bind="text: highlight"></li>
-                    </ul>
-                    <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x" aria-hidden="true" style="position:absolute; bottom:0; left:0"></i>
+
+
+                <div data-bind="visible: shown()==3" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-half " style="display:none">
+
+                    <div class="w-100 proj-high">
+                        <div class="proj-high-txt">
+                            <!-- ko foreach: project_highlights -->
+                            <div data-bind="text: highlight"></div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+
+                    <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x arrow-l" aria-hidden="true"></i>
                 </div>
             </div>
-
 
         </div>
     </section>

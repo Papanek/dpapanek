@@ -47,12 +47,7 @@ body{
     vertical-align: middle;
 }
 
-.section-space{
-    padding-top: 1em;
-}
-
 .heading-text {
-    padding-top: 1em;
     font-size: larger;
 }
 
@@ -62,6 +57,7 @@ body{
 
 .big-text {
     font-size: 5em;
+    font-family: HeadlinerNo45;
 }
 
 .fadein
@@ -76,8 +72,8 @@ body{
 }
 
 .content{
-  text-align: center;
-  display: none;
+    text-align: center;
+    display: none;
 }
 
 
@@ -97,9 +93,19 @@ body{
 @keyframes slide {
     100% { left: 0; }
 }
+
+.middle-half {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50vh;
 }
 
-.projects-section{
-    padding-top: 1em;
-    padding-bottom: 1em;
+.middle-full {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100vh;
+}
+
+.screen-height {
+    height: 50vh;
 }

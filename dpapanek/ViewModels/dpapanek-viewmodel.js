@@ -9,9 +9,16 @@
     });
 
     $.get('/api/projects', function (projects) {
-        console.log(projects);
-        self.projects(projects);
+        projects.forEach(function (project) {
+            project.shown = ko.observable(1);
+            console.log(project);
+            self.projects.push(project);
+        });
     });
+
+    self.changeShown = function (project, direction) {
+        project.shown(project.shown() + direction);
+    };
 }
 
 ko.applyBindings(new dpapanekViewModel());

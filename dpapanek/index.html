@@ -13,6 +13,7 @@
     <script src="Scripts/knockout-3.4.2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/e3d5c204f5.js"></script>
 </head>
 <body>
     <div class="loader"></div>
@@ -55,16 +56,20 @@
         <div class="container-fluid">
 
             <div class="row" data-bind="foreach: projects" >
-                <div data-bind="attr: { 'id': 'title_' + project_id }" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-height" style="background-color: pink;">
+                <div data-bind="visible: shown()==1" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-height" style="background-color: pink;">
                     <span class= "big-text" data-bind="text: short_title"></span>
+                    <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x" aria-hidden="true" style="position:absolute; bottom:0; right:0"></i>
                 </div>
-                <div data-bind="attr: { 'id': 'desc_' + project_id }" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: purple; display:none">
+                <div data-bind="visible: shown()==2" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: purple; display:none">
                     <span data-bind="text: description"></span>
+                    <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x" aria-hidden="true" style="position:absolute; bottom:0; left:0"></i>
+                    <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x" aria-hidden="true" style="position:absolute; bottom:0; right:0"></i>
                 </div>
-                <div data-bind="attr: { 'id': 'high_' + project_id }" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: red; display:none">
+                <div data-bind="visible: shown()==3" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: red; display:none">
                     <ul data-bind="foreach: project_highlights">
                         <li data-bind="text: highlight"></li>
                     </ul>
+                    <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x" aria-hidden="true" style="position:absolute; bottom:0; left:0"></i>
                 </div>
             </div>
 
@@ -72,16 +77,7 @@
         </div>
     </section>
 
-    <button id="btn">test</button>
     <script src="ViewModels/dpapanek-viewmodel.js"></script>
     <script src="Content/js/animations.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#btn").click(function () {
-                $("#title_1").toggle();
-                $("#desc_1").toggle();
-            });
-        });
-    </script>
 </body>
 </html>

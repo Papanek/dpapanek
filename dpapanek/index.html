@@ -4,10 +4,11 @@
     <title>dpapanek</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="Content/Site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="Scripts/jquery-3.2.1.js"></script>
     <script src="Scripts/knockout-3.4.2.js"></script>
@@ -16,47 +17,44 @@
 </head>
 <body>
     <div class="loader"></div>
-
     <div class="bg content">
         <div class="center-container main">
             <div class="center-row">
-                <div class="col-xs-6 bg-one text-center big-text" style="border-right: 1px solid #eee">Daniel<br />Papanek</div>
-                <div class="col-xs-6 bg-two text-center" style="background-color:rgba(0, 0, 0, 0.65); border-left: 1px solid #eee"><h2>Developer.<br />Lover.<br />Entrepreneur.</h2></div>
+                <div class="col-xs-6 bg-one text-center big-text">Daniel<br />Papanek</div>
+                <div class="col-xs-6 bg-two text-center" style="background-color:rgba(39,34,53, 0.65);"><h2>Developer.<br />Lover.<br />Entrepreneur.</h2></div>
             </div>
         </div>
     </div>
-
     <section id="skills" class="content" style="background-color:black">
-        <div class="container-fluid" style="text-align: center; background-color:white;">
-
+        <div class="container-fluid" style="background-color:white">
 
             <div class="row">
-
-                <div class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-full" style="background-color:purple; height:100vh; float:left">
-                    <span class="big-text">skills</span>
+                <div class="middle-text heading-column col-xs-12 col-sm-12 col-lg-6 col-xl-6">
+                    <div class="big-text" style="color:white;">skills</div>
                 </div>
 
-                <!-- ko foreach: skill_categories -->
-                <div class="col-xs-12 col-sm-6 col-lg-3 col-xl-1">
-                    <div class="heading-text fadein" data-bind="text: category"></div>
-                    <ul class="list-group list-text" data-bind="foreach: skills">
-                        <li class="list-group-item fadein" data-bind="text: title"></li>
-                    </ul>
+                <div class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 skills-content">
+                    <div class="container-fluid">
+                        <div class="row full-column" data-bind="foreach: skill_categories">
+                            <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-6" style="padding-bottom:10px;">
+                                <div class="heading-text heading-padding fadein" data-bind="text: category.toUpperCase()"></div>
+                                <div data-bind="foreach: skills">
+                                    <div class="fadein item-padding" data-bind="text: title"></div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- /ko -->
-
             </div>
-
-
         </div>
     </section>
-
     <section id="projects" class="content">
         <div class="container-fluid">
-
-            <div class="row" data-bind="foreach: projects" >
+            <div class="row" data-bind="foreach: projects">
                 <div data-bind="attr: { 'id': 'title_' + project_id }" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-height" style="background-color: pink;">
-                    <span class= "big-text" data-bind="text: short_title"></span>
+                    <span class="big-text" data-bind="text: short_title"></span>
                 </div>
                 <div data-bind="attr: { 'id': 'desc_' + project_id }" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-height" style="background-color: purple; display:none">
                     <span data-bind="text: description"></span>
@@ -68,10 +66,8 @@
                 </div>
             </div>
 
-
         </div>
     </section>
-
     <button id="btn">test</button>
     <script src="ViewModels/dpapanek-viewmodel.js"></script>
     <script src="Content/js/animations.js"></script>

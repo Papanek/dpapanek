@@ -109,6 +109,12 @@ body{
     vertical-align: middle;
 }
 
+.middle-half {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50vh;
+}
+
 .screen-height {
     height: 50vh;
 }
@@ -187,6 +193,7 @@ body{
     display: table-cell;
     vertical-align: middle;
 }
+
 @media (max-width: 992px) {
     .heading-column {
         line-height:20vh;

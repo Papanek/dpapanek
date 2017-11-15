@@ -11,6 +11,7 @@
     $.get('/api/projects', function (projects) {
         projects.forEach(function (project) {
             project.shown = ko.observable(1);
+            project.proj_style = ko.observable("proj_" + project.project_id % 4);
             console.log(project);
             self.projects.push(project);
         });

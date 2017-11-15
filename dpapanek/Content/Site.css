@@ -199,3 +199,20 @@ body{
         line-height:20vh;
     }
 }
+
+.proj_1 {
+    background-color: rgb(125,145,111);
+}
+
+.proj_2 {
+    background-color: rgb(39,34,53);
+    color: white;
+}
+
+.proj_3 {
+    background-color: cyan;
+}
+
+.proj_0 {
+    background-color: magenta;
+}

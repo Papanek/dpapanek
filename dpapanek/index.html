@@ -22,7 +22,7 @@
         <div class="center-container main">
             <div class="center-row">
                 <div class="col-xs-6 bg-one text-center big-text">Daniel<br />Papanek</div>
-                <div class="col-xs-6 bg-two text-center" style="background-color:rgba(39,34,53, 0.65);"><h2>Developer.<br />Lover.<br />Entrepreneur.</h2></div>
+                <div class="col-xs-6 bg-two text-center" style="background-color:rgba(39,34,53, 0.65);"><h2>Developer.</h2></div>
             </div>
         </div>
     </div>
@@ -41,8 +41,6 @@
                                 <div class="heading-text heading-padding fadein" data-bind="text: category.toUpperCase()"></div>
                                 <div data-bind="foreach: skills">
                                     <div class="fadein item-padding" data-bind="text: title"></div>
-                                    <div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -56,32 +54,29 @@
 
             <div class="row" data-bind="foreach: projects" >
 
-                <div data-bind="visible: shown()==1" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-half">
-                    <span class= "big-text" data-bind="text: short_title"></span>
+                <div data-bind="visible: shown()==1, css: proj_style" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 middle-half screen-half">
+                    <span class="big-text" data-bind="text: short_title"></span>
                     <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x arrow-r" aria-hidden="true"></i>
                 </div>
-                
-                <div data-bind="visible: shown()==2" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-half" style="display:none">
+
+                <div data-bind="visible: shown()==2, css: proj_style" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-half" style="display:none">
                     <div class="w-100 proj-title">
                         <div data-bind="text: title" class="proj-title-txt"></div>
                     </div>
                     <div class="w-100 proj-desc">
                         <div data-bind="text: description" style="display:table-cell;"></div>
                     </div>
-                        
-                    
+
+
                     <i data-bind="click: function(data) { $root.changeShown(data, -1) }" class="fa fa-chevron-circle-left fa-3x arrow-l" aria-hidden="true"></i>
                     <i data-bind="click: function(data) { $root.changeShown(data, 1) }" class="fa fa-chevron-circle-right fa-3x arrow-r" aria-hidden="true"></i>
                 </div>
 
-
-                <div data-bind="visible: shown()==3" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-half " style="display:none">
+                <div data-bind="visible: shown()==3, css: proj_style" class="col-xs-12 col-sm-12 col-lg-6 col-xl-6 screen-half " style="display:none">
 
                     <div class="w-100 proj-high">
-                        <div class="proj-high-txt">
-                            <!-- ko foreach: project_highlights -->
-                            <div data-bind="text: highlight"></div>
-                            <!-- /ko -->
+                        <div data-bind="foreach: project_highlights" class="proj-high-txt">
+                            <div data-bind="text: '- ' + highlight"></div>
                         </div>
                     </div>
 
